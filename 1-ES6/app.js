@@ -2,14 +2,20 @@ class App {
     constructor() {
         this.rootEl = document.querySelector('.root');
         this.requestService = new RequestService();
+        this.sidebar = new Sidebar();
+        this.pageContent = new PageContent();
+        this.sourcesList = new SourcesList();
+        this.newsList= new NewsList();
     }
 
     buildLayout([{articles}, {sources}]) {
-        const p = document.createElement("p");
-        this.rootEl.appendChild(p);
+        const newsListComponent = this.newsList.build(articles).getComponent();
+        const pageContentComponent = this.pageContent.build(newsListComponent).getComponent();
+        const sourcesListComponent = this.sourcesList.build(sources).getComponent();
+        const sidebarComponent = this.sidebar.build(sourcesListComponent).getComponent();
 
-        console.log(articles);
-        console.log(sources);
+        this.rootEl.appendChild(sidebarComponent);
+        this.rootEl.appendChild(pageContentComponent);
     }
 
     fetchData() {
