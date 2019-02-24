@@ -1,31 +1,31 @@
 class RequestService {
-    constructor() {
-        this.apiKey = apiLocalConfig.apiKey;
-        this.urlPrefix = apiLocalConfig.urlPrefix;
-        this.topHeadlinesParam = apiLocalConfig.topHeadlinesParam;
-        this.sourcesParam = apiLocalConfig.sourcesParam;
-        this.defaultSources = apiLocalConfig.defaultSources;
-    }
+	constructor() {
+		this.apiKey = apiLocalConfig.apiKey;
+		this.urlPrefix = apiLocalConfig.urlPrefix;
+		this.topHeadlinesParam = apiLocalConfig.topHeadlinesParam;
+		this.sourcesParam = apiLocalConfig.sourcesParam;
+		this.defaultSources = apiLocalConfig.defaultSources;
+	}
 
-    getTopHeadlinesURL(sources) {
-        const sourceList = sources ? sourses : this.defaultSources.join(',');
+	getTopHeadlinesURL(sources) {
+		const sourceList = sources ? sources : this.defaultSources.join(',');
 
-        return `${this.urlPrefix}/${this.topHeadlinesParam}?sources=${sourceList}&apiKey=${this.apiKey}`;
-    }
+		return `${this.urlPrefix}/${this.topHeadlinesParam}?sources=${sourceList}&apiKey=${this.apiKey}`;
+	}
 
-    getSourcesURl() {
-        return `${this.urlPrefix}/${this.sourcesParam}?apiKey=${this.apiKey}`;
-    }
+	getSourcesURl() {
+		return `${this.urlPrefix}/${this.sourcesParam}?apiKey=${this.apiKey}`;
+	}
 
-    getTopHeadlinesNews(sources) {
-        const url = this.getTopHeadlinesURL(sources);
+	getTopHeadlinesNews(sources) {
+		const url = this.getTopHeadlinesURL(sources);
 
-        return fetch(url).then(data => data.json());
-    }
+		return fetch(url).then(data => data.json());
+	}
 
-    getSourcesNews() {
-        const url = this.getSourcesURl();
+	getSourcesNews() {
+		const url = this.getSourcesURl();
 
-        return fetch(url).then(data => data.json());
-    }
+		return fetch(url).then(data => data.json());
+	}
 }

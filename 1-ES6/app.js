@@ -1,30 +1,46 @@
 class App {
-    constructor() {
-        this.rootEl = document.querySelector('.root');
-        this.requestService = new RequestService();
-        this.sidebar = new Sidebar();
-        this.pageContent = new PageContent();
-        this.sourcesList = new SourcesList();
-        this.newsList= new NewsList();
-    }
+	constructor() {
+		this.rootEl = document.querySelector('.root');
+		this.requestService = new RequestService();
+		this.sidebar = new Sidebar();
+		this.pageContent = new PageContent();
+		this.sourcesList = new SourcesList();
+		this.newsList = new NewsList();
+	}
 
-    buildLayout([{articles}, {sources}]) {
-        const newsListComponent = this.newsList.build(articles).getComponent();
-        const pageContentComponent = this.pageContent.build(newsListComponent).getComponent();
-        const sourcesListComponent = this.sourcesList.build(sources).getComponent();
-        const sidebarComponent = this.sidebar.build(sourcesListComponent).getComponent();
+	initEventHandlers() {
+		this.sourcesList.initCheckboxHandler(this.getEventHandlersCallbacks());
+	}
 
-        this.rootEl.appendChild(sidebarComponent);
-        this.rootEl.appendChild(pageContentComponent);
-    }
+	buildLayout([{
+		articles
+	}, {
+		sources
+	}]) {
+		const newsListComponent = this.newsList.build(articles).getComponent();
+		const pageContentComponent = this.pageContent.build(newsListComponent).getComponent();
+		const sourcesListComponent = this.sourcesList.build(sources).getComponent();
+		const sidebarComponent = this.sidebar.build(sourcesListComponent).getComponent();
 
-    fetchData() {
-        return Promise.all([this.requestService.getTopHeadlinesNews(), this.requestService.getSourcesNews()]);
-    }
+		this.rootEl.appendChild(sidebarComponent);
+		this.rootEl.appendChild(pageContentComponent);
+	}
 
-    init() {
-        this.fetchData().then(data => {
-            this.buildLayout(data);
-        });
-    }
+	fetchData() {
+		return Promise.all([this.requestService.getTopHeadlinesNews(), this.requestService.getSourcesNews()]);
+	}
+
+	getEventHandlersCallbacks() {
+		return {
+			getTopHeadlinesNews: this.requestService.getTopHeadlinesNews.bind(this.requestService),
+			updateNewsList: this.newsList.updateComponent.bind(this.newsList)
+		};
+	}
+
+	init() {
+		this.fetchData().then(data => {
+			this.initEventHandlers(data);
+			this.buildLayout(data);
+		});
+	}
 }
