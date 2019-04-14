@@ -32,29 +32,16 @@ function () {
   function NewsList() {
     _classCallCheck(this, NewsList);
 
-    this.newsComponent = this.createComponent();
+    this.newsComponent = NewsList.createComponent();
     this.newsArticles = null;
   }
 
   _createClass(NewsList, [{
-    key: "createComponent",
-    value: function createComponent() {
-      return document.createElement('div');
-    }
-  }, {
     key: "getNews",
     value: function getNews(articles) {
-      var _this = this;
-
       return articles.map(function (article) {
-        return "<article class=\"news-item\">\n        ".concat(article.urlToImage ? "<div class=\"news-item_img-wrap\"><img class=\"news-item_img\" src=".concat(article.urlToImage, " alt='").concat(article.title, "'></div>") : '', "\n\t\t\t\t<div class=\"news-item_content\">\n\t\t\t\t\t<h2 class=\"news-item_title\">").concat(article.title, "</h2>\n\t\t\t\t\t<p class=\"news-item_info\">\n\t\t\t\t\t\t\t").concat(article.author ? "<span class=\"news-item_info-item\"><img src=\"./img/news.svg\"> ".concat(article.author, "</span>") : '', "\n\t\t\t\t\t\t\t").concat(article.publishedAt ? "<span class=\"news-item_info-item\"><img src=\"./img/date.svg\">".concat(_this.transformPublishedDate(article.publishedAt), "</span>") : '', "\n\t\t\t\t\t</p>\n\t\t\t\t\t").concat(article.description ? "<p class=\"news-item_description\">".concat(article.description, "</p>") : '', "\n\t\t\t\t\t<a class=\"news-item_link\" href=").concat(article.url, " target=\"_blank\" title=\"").concat(article.title, "\">Read more</a>\n\t\t\t\t</div>\n\t\t\t</article>");
+        return "<article class=\"news-item\">\n        ".concat(article.urlToImage ? "<div class=\"news-item_img-wrap\">\n            <img class=\"news-item_img\" src=".concat(article.urlToImage, " alt='").concat(article.title, "'>\n        </div>") : '', "\n        <div class=\"news-item_content\">\n          <h2 class=\"news-item_title\">").concat(article.title, "</h2>\n          <p class=\"news-item_info\">\n            ").concat(article.author ? "<span class=\"news-item_info-item\"><img src=\"./img/news.svg\"> ".concat(article.author, "</span>") : '', "\n\n            ").concat(article.publishedAt ? "<span class=\"news-item_info-item\"><img src=\"./img/date.svg\">".concat(NewsList.transformPublishedDate(article.publishedAt), "</span>") : '', "\n          </p>\n          ").concat(article.description ? "<p class=\"news-item_description\">".concat(article.description, "</p>") : '', "\n          <a class=\"news-item_link\" href=").concat(article.url, " target=\"_blank\" title=\"").concat(article.title, "\">Read more</a>\n        </div>\n      </article>");
       }).join('');
-    }
-  }, {
-    key: "transformPublishedDate",
-    value: function transformPublishedDate(date) {
-      var newDate = new Date(date);
-      return newDate.toLocaleString();
     }
   }, {
     key: "build",
@@ -79,6 +66,17 @@ function () {
         this.newsComponent.innerHTML = this.newsArticles;
       }
     }
+  }], [{
+    key: "createComponent",
+    value: function createComponent() {
+      return document.createElement('div');
+    }
+  }, {
+    key: "transformPublishedDate",
+    value: function transformPublishedDate(date) {
+      var newDate = new Date(date);
+      return newDate.toLocaleString();
+    }
   }]);
 
   return NewsList;
@@ -90,15 +88,10 @@ function () {
   function PageContent() {
     _classCallCheck(this, PageContent);
 
-    this.pageContent = this.createComponent();
+    this.pageContent = PageContent.createComponent();
   }
 
   _createClass(PageContent, [{
-    key: "createComponent",
-    value: function createComponent() {
-      return document.createElement('section');
-    }
-  }, {
     key: "build",
     value: function build(component) {
       this.pageContent.className = 'page-content';
@@ -109,6 +102,11 @@ function () {
     key: "getComponent",
     value: function getComponent() {
       return this.pageContent;
+    }
+  }], [{
+    key: "createComponent",
+    value: function createComponent() {
+      return document.createElement('section');
     }
   }]);
 
@@ -121,21 +119,11 @@ function () {
   function Sidebar() {
     _classCallCheck(this, Sidebar);
 
-    this.sidebar = this.createComponent();
-    this.sidebarTitle = this.createTitle();
+    this.sidebar = Sidebar.createComponent();
+    this.sidebarTitle = Sidebar.createTitle();
   }
 
   _createClass(Sidebar, [{
-    key: "createComponent",
-    value: function createComponent() {
-      return document.createElement('aside');
-    }
-  }, {
-    key: "createTitle",
-    value: function createTitle() {
-      return document.createElement('h3');
-    }
-  }, {
     key: "getComponent",
     value: function getComponent() {
       return this.sidebar;
@@ -150,6 +138,16 @@ function () {
       this.sidebar.appendChild(component);
       return this;
     }
+  }], [{
+    key: "createComponent",
+    value: function createComponent() {
+      return document.createElement('aside');
+    }
+  }, {
+    key: "createTitle",
+    value: function createTitle() {
+      return document.createElement('h3');
+    }
   }]);
 
   return Sidebar;
@@ -161,47 +159,30 @@ function () {
   function SourcesList() {
     _classCallCheck(this, SourcesList);
 
-    this.wrapper = this.createComponentWrap();
-    this.list = this.createComponent();
+    this.wrapper = SourcesList.createComponentWrap();
+    this.list = SourcesList.createComponent();
     this.sourceItemDelay = 1300;
   }
 
   _createClass(SourcesList, [{
-    key: "createComponent",
-    value: function createComponent() {
-      return document.createElement('ul');
-    }
-  }, {
-    key: "createComponentWrap",
-    value: function createComponentWrap() {
-      return document.createElement('div');
-    }
-  }, {
-    key: "getListItems",
-    value: function getListItems(sources) {
-      return sources.map(function (source) {
-        return "<li class=\"filter_item\">\n\t\t\t\t<label class=\"filter_item-label\">\n\t\t\t\t\t\t<input class=\"filter_item-input\" type=\"checkbox\" value=".concat(source.id, ">\n\t\t\t\t\t\t<span class=\"filter_item-text\">").concat(source.name, "</span>\n\t\t\t\t</label>\n      </li>");
-      }).join('');
-    }
-  }, {
     key: "build",
     value: function build(sources) {
       this.list.className = 'filter_list';
       this.wrapper.className = 'filter';
-      this.list.innerHTML = this.getListItems(sources);
+      this.list.innerHTML = SourcesList.getListItems(sources);
       this.wrapper.appendChild(this.list);
       return this;
     }
   }, {
     key: "initCheckboxHandler",
     value: function initCheckboxHandler(_ref) {
-      var _this2 = this;
+      var _this = this;
 
       var getTopHeadlinesNews = _ref.getTopHeadlinesNews,
           updateNewsList = _ref.updateNewsList;
       this.list.addEventListener('click', function (e) {
         if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
-          var checkedValues = _this2.getAllCheckedValues();
+          var checkedValues = _this.getAllCheckedValues();
 
           getTopHeadlinesNews(checkedValues).then(function (_ref2) {
             var articles = _ref2.articles;
@@ -221,8 +202,25 @@ function () {
     }
   }, {
     key: "getComponent",
-    value: function getComponent(sources) {
+    value: function getComponent() {
       return this.wrapper;
+    }
+  }], [{
+    key: "createComponent",
+    value: function createComponent() {
+      return document.createElement('ul');
+    }
+  }, {
+    key: "createComponentWrap",
+    value: function createComponentWrap() {
+      return document.createElement('div');
+    }
+  }, {
+    key: "getListItems",
+    value: function getListItems(sources) {
+      return sources.map(function (source) {
+        return "<li class=\"filter_item\">\n        <label class=\"filter_item-label\">\n          <input class=\"filter_item-input\" type=\"checkbox\" value=".concat(source.id, ">\n          <span class=\"filter_item-text\">").concat(source.name, "</span>\n        </label>\n      </li>");
+      }).join('');
     }
   }]);
 
@@ -245,7 +243,7 @@ function () {
   _createClass(RequestService, [{
     key: "getTopHeadlinesURL",
     value: function getTopHeadlinesURL(sources) {
-      var sourceList = sources ? sources : this.defaultSources.join(',');
+      var sourceList = sources || this.defaultSources.join(',');
       return "".concat(this.urlPrefix, "/").concat(this.topHeadlinesParam, "?sources=").concat(sourceList, "&apiKey=").concat(this.apiKey);
     }
   }, {
@@ -385,12 +383,12 @@ function () {
   }, {
     key: "init",
     value: function init() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.fetchData().then(function (data) {
-        _this3.initEventHandlers(data);
+        _this2.initEventHandlers(data);
 
-        _this3.buildLayout(data);
+        _this2.buildLayout(data);
       });
     }
   }]);

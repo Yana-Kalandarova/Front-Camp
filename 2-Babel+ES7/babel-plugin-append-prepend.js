@@ -8,26 +8,25 @@
  */
 
 module.exports = () => {
+  const isCorrectExpression = (path) => {
+    const { parentPath } = path;
 
-    const isCorrectExpression = (path) => {
-        let {parentPath} = path;
+    if (parentPath.isCallExpression() && parentPath.get('arguments').length === 1) return true;
+  };
 
-        if (parentPath.isCallExpression() && parentPath.get("arguments").length === 1) return true;
-    };
+  return {
+    visitor: {
+      MemberExpression(path) {
+        if (!isCorrectExpression(path)) return;
 
-    return {
-        visitor: {
-            MemberExpression(path) {
-                if (!isCorrectExpression(path)) return;
-
-                if (path.node.property.name === 'append') {
-                    path.node.property.name = 'appendChild';
-                }
-
-                if (path.node.property.name === 'prepend') {
-                    path.node.property.name = 'prependChild';
-                }
-            }
+        if (path.node.property.name === 'append') {
+          path.node.property.name = 'appendChild';
         }
-    };
+
+        if (path.node.property.name === 'prepend') {
+          path.node.property.name = 'prependChild';
+        }
+      },
+    },
+  };
 };
