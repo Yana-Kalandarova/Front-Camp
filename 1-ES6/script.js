@@ -1,4 +1,4 @@
 (function () {
-	const myApp = new App();
-	myApp.init();
+  const myApp = new App();
+  myApp.init();
 }());

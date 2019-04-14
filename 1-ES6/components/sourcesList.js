@@ -1,65 +1,59 @@
 class SourcesList {
-	constructor() {
-		this.wrapper = this.createComponentWrap();
-		this.list = this.createComponent();
-		this.sourceItemDelay = 1300;
-	}
+  constructor() {
+    this.wrapper = SourcesList.createComponentWrap();
+    this.list = SourcesList.createComponent();
+    this.sourceItemDelay = 1300;
+  }
 
-	createComponent() {
-		return document.createElement('ul');
-	}
+  static createComponent() {
+    return document.createElement('ul');
+  }
 
-	createComponentWrap() {
-		return document.createElement('div');
-	}
+  static createComponentWrap() {
+    return document.createElement('div');
+  }
 
-	getListItems(sources) {
-		return sources.map(source => (
-			`<li class="filter_item">
-				<label class="filter_item-label">
-						<input class="filter_item-input" type="checkbox" value=${source.id}>
-						<span class="filter_item-text">${source.name}</span>
-				</label>
+  static getListItems(sources) {
+    return sources.map(source => (
+      `<li class="filter_item">
+        <label class="filter_item-label">
+          <input class="filter_item-input" type="checkbox" value=${source.id}>
+          <span class="filter_item-text">${source.name}</span>
+        </label>
       </li>`
-		)).join('');
-	}
+    )).join('');
+  }
 
-	build(sources) {
-		this.list.className = 'filter_list';
-		this.wrapper.className = 'filter';
-		this.list.innerHTML = this.getListItems(sources);
-		this.wrapper.append(this.list);
+  build(sources) {
+    this.list.className = 'filter_list';
+    this.wrapper.className = 'filter';
+    this.list.innerHTML = SourcesList.getListItems(sources);
+    this.wrapper.append(this.list);
 
-		return this;
-	}
+    return this;
+  }
 
-	initCheckboxHandler({
-		getTopHeadlinesNews,
-		updateNewsList
-	}) {
-		this.list.addEventListener('click', (e) => {
+  initCheckboxHandler({ getTopHeadlinesNews, updateNewsList }) {
+    this.list.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
+        const checkedValues = this.getAllCheckedValues();
 
-			if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
-				const checkedValues = this.getAllCheckedValues();
+        getTopHeadlinesNews(checkedValues).then(({articles}) => {
+          updateNewsList(articles);
+        });
+      }
+    });
+  }
 
-				getTopHeadlinesNews(checkedValues).then(({
-					articles
-				}) => {
-					updateNewsList(articles);
-				});
-			}
-		});
-	}
+  getAllCheckedValues() {
+    const checkedValues = [];
 
-	getAllCheckedValues() {
-		let checkedValues = [];
+    Array.from(this.list.querySelectorAll('input:checked')).forEach(elem => checkedValues.push(elem.value));
 
-		this.list.querySelectorAll('input:checked').forEach(elem => checkedValues.push(elem.value));
+    return checkedValues.join(',');
+  }
 
-		return checkedValues.join(',');
-	}
-
-	getComponent(sources) {
-		return this.wrapper;
-	}
+  getComponent() {
+    return this.wrapper;
+  }
 }
