@@ -17,13 +17,16 @@ class App {
 	}, {
 		sources
 	}]) {
+		const fragment = document.createDocumentFragment();
 		const newsListComponent = this.newsList.build(articles).getComponent();
 		const pageContentComponent = this.pageContent.build(newsListComponent).getComponent();
 		const sourcesListComponent = this.sourcesList.build(sources).getComponent();
 		const sidebarComponent = this.sidebar.build(sourcesListComponent).getComponent();
 
-		this.rootEl.appendChild(sidebarComponent);
-		this.rootEl.appendChild(pageContentComponent);
+		fragment.appendChild(sidebarComponent);
+		fragment.appendChild(pageContentComponent);
+
+		this.rootEl.appendChild(fragment);
 	}
 
 	fetchData() {
