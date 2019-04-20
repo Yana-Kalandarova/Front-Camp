@@ -1,0 +1,24 @@
+{
+  "name": "FC-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel app.js -d compiled/",
+    "watch": "babel app.js --watch --out-file compiled.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yana-Kalandarova/Front-Camp.git"
+  },
+  "author": "Yana Kalandarava",
+  "license": "ISC",
+  "homepage": "https://github.com/Yana-Kalandarova/Front-Camp#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3"
+  },
+  "dependencies": {}
+}
