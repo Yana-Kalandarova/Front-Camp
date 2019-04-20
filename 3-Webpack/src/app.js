@@ -224,12 +224,20 @@ class RequestService {
 
 class App {
   constructor() {
-    this.rootEl = document.querySelector('.root');
+    this.body = document.querySelector('body');
+    this.rootEl = this.createRootEl();
     this.requestService = new RequestService();
     this.sidebar = new Sidebar();
     this.pageContent = new PageContent();
     this.sourcesList = new SourcesList();
     this.newsList = new NewsList();
+  }
+
+  createRootEl() {
+    this.rootEl = document.createElement('div');
+    this.rootEl.classList.add('root');
+
+    return this.rootEl;
   }
 
   initEventHandlers() {
@@ -243,10 +251,10 @@ class App {
     const sourcesListComponent = this.sourcesList.build(sources).getComponent();
     const sidebarComponent = this.sidebar.build(sourcesListComponent).getComponent();
 
-    fragment.appendChild(sidebarComponent);
-    fragment.appendChild(pageContentComponent);
-
-    this.rootEl.appendChild(fragment);
+    fragment.append(sidebarComponent);
+    fragment.append(pageContentComponent);
+    this.rootEl.append(fragment);
+    this.body.append(this.rootEl);
   }
 
   fetchData() {
@@ -268,5 +276,4 @@ class App {
   }
 }
 
-const myApp = new App();
-myApp.init();
+export default App;
