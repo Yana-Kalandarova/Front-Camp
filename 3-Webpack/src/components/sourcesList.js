@@ -1,3 +1,6 @@
+import checkboxFalse from '../img/checkbox-false.svg';
+import checkboxTrue from '../img/checkbox-true.svg';
+
 class SourcesList {
   constructor() {
     this.wrapper = SourcesList.createComponentWrap();
@@ -18,7 +21,13 @@ class SourcesList {
       `<li class="filter_item">
         <label class="filter_item-label">
           <input class="filter_item-input" type="checkbox" value=${source.id}>
-          <span class="filter_item-text">${source.name}</span>
+          <span class="filter_item-text">
+            <span class="filter_item-icon">
+              <svg><use xlink:href="#${checkboxFalse.id}"></svg>
+              <svg><use xlink:href="#${checkboxTrue.id}"></svg>
+            </span>
+            ${source.name}
+          </span>
         </label>
       </li>`
     )).join('');

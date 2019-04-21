@@ -1,3 +1,5 @@
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SpriteLoader = require('svg-sprite-loader/plugin');
 const path = require('path');
@@ -42,17 +44,30 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: {
-          loader: 'svg-sprite-loader',
-          options: {
-            name: '[name].svg',
-            outputPath: 'img/',
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: (isProduction) ? {
+              extract: true,
+            } : {},
           },
-        },
+          {
+            loader: 'svgo-loader',
+            options: {
+              plugins: [
+                { removeTitle: true },
+              ],
+            },
+          },
+        ],
       },
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'News App',
+    }),
     new SpriteLoader({
       plainSprite: true,
       spriteAttrs: { hidden: true },
