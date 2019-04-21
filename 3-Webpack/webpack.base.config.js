@@ -1,8 +1,8 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SpriteLoader = require('svg-sprite-loader/plugin');
 const path = require('path');
+
+const isProduction = (process.env.NODE_ENV.trim() === 'production');
 
 module.exports = {
   entry: ['@babel/polyfill', 'whatwg-fetch', './index.js'],
@@ -16,7 +16,6 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        //include: path.resolve(__dirname, 'src'),
         use: {
           loader: 'babel-loader',
           options: {
@@ -28,7 +27,7 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: (process.env.NODE_ENV === 'production') ? MiniCssExtractPlugin.loader : 'style-loader',
+            loader: (isProduction) ? MiniCssExtractPlugin.loader : 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -54,8 +53,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(),
     new SpriteLoader({
       plainSprite: true,
       spriteAttrs: { hidden: true },

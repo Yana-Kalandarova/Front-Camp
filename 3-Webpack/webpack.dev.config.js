@@ -3,15 +3,8 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base.config');
 
 module.exports = merge(baseConfig, {
-  //devtool: 'inline-source-map',
-  /*module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },*/
+  mode: 'development',
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
   },

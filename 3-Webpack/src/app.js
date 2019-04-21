@@ -36,7 +36,7 @@ class App {
     fragment.append(sidebarComponent);
     fragment.append(pageContentComponent);
     this.rootEl.append(fragment);
-    this.body.append(this.rootEl);
+    this.body.prepend(this.rootEl);
   }
 
   fetchData() {
