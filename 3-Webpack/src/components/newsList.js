@@ -1,3 +1,7 @@
+import dateIcon from '../img/date.svg';
+import newsIcon from '../img/news.svg';
+import arrowIcon from '../img/chevron.svg';
+
 class NewsList {
   constructor() {
     this.newsComponent = NewsList.createComponent();
@@ -20,17 +24,20 @@ class NewsList {
           <h2 class="news-item_title">${article.title}</h2>
           <p class="news-item_info">
             ${article.author
-        ? `<span class="news-item_info-item"><img src="./img/news.svg"> ${article.author}</span>`
+        ? `<span class="news-item_info-item"><svg><use xlink:href="#${newsIcon.id}"></svg> ${article.author}</span>`
         : ''}
 
             ${article.publishedAt
-        ? `<span class="news-item_info-item"><img src="./img/date.svg">${NewsList.transformPublishedDate(article.publishedAt)}</span>`
+        ? `<span class="news-item_info-item"><svg><use xlink:href="#${dateIcon.id}"></svg> ${NewsList.transformPublishedDate(article.publishedAt)}</span>`
         : ''}
           </p>
           ${article.description
         ? `<p class="news-item_description">${article.description}</p>`
         : ''}
-          <a class="news-item_link" href=${article.url} target="_blank" title="${article.title}">Read more</a>
+          <a class="news-item_link" href=${article.url} target="_blank" title="${article.title}">
+            Read more
+            <svg class="news-item_link-icon"><use xlink:href="#${arrowIcon.id}"></svg>
+          </a>
         </div>
       </article>`
     )).join('');
