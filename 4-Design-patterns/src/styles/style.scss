@@ -17,14 +17,19 @@ body {
 }
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
   flex: 0 0 auto;
   height: 100vh;
   padding: 15px;
   background: #ccc;
-  overflow-y: auto;
 }
 
 .filter {
+  background: #ddd;
+  overflow-y: auto;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+
   &_list {
     padding: 0;
     list-style-type: none;
@@ -64,6 +69,23 @@ body {
     &-input:checked + &-text svg:last-child {
       opacity: 1;
     }
+  }
+}
+
+.news-btn_wrapper {
+  margin: 15px 0;
+}
+
+.news-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #777;
+  border-radius: 4px;
+  background: #ddd;
+
+  &:hover {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
   }
 }
 

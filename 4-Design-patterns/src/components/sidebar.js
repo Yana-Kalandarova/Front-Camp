@@ -16,13 +16,14 @@ class Sidebar {
     return this.sidebar;
   }
 
-  build(component) {
+  build(component, btn) {
     this.sidebar.className = 'sidebar';
     this.sidebarTitle.className = 'sidebar_title';
     this.sidebarTitle.textContent = 'Select Source of News';
 
     this.sidebar.append(this.sidebarTitle);
     this.sidebar.append(component);
+    this.sidebar.append(btn);
 
     return this;
   }

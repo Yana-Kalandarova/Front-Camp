@@ -50,24 +50,19 @@ class NewsList {
   }
 
   build(articles) {
-    this.newsArticles = this.getNews(articles);
-    this.newsComponent.className = 'news-list';
-    this.newsComponent.innerHTML = this.newsArticles;
+    const newsItems = this.getNews(articles);
+
+    if (this.newsArticles !== newsItems) {
+      this.newsArticles = newsItems;
+      this.newsComponent.className = 'news-list';
+      this.newsComponent.innerHTML = this.newsArticles;
+    }
 
     return this;
   }
 
   getComponent() {
     return this.newsComponent;
-  }
-
-  updateComponent(articles) {
-    const newsItems = this.getNews(articles);
-
-    if (this.newsArticles !== newsItems) {
-      this.newsArticles = newsItems;
-      this.newsComponent.innerHTML = this.newsArticles;
-    }
   }
 }
 

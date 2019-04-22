@@ -42,24 +42,12 @@ class SourcesList {
     return this;
   }
 
-  initCheckboxHandler({ getTopHeadlinesNews, updateNewsList }) {
-    this.list.addEventListener('click', (e) => {
-      if (e.target.tagName === 'INPUT' && e.target.type === 'checkbox') {
-        const checkedValues = this.getAllCheckedValues();
-
-        getTopHeadlinesNews(checkedValues).then(({ articles }) => {
-          updateNewsList(articles);
-        });
-      }
-    });
-  }
-
   getAllCheckedValues() {
     const checkedValues = [];
 
     Array.from(this.list.querySelectorAll('input:checked')).forEach(elem => checkedValues.push(elem.value));
 
-    return checkedValues.join(',');
+    return checkedValues.length && checkedValues.join(',');
   }
 
   getComponent() {

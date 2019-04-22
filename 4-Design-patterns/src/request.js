@@ -6,7 +6,6 @@ class RequestService {
     this.urlPrefix = apiLocalConfig.urlPrefix;
     this.topHeadlinesParam = apiLocalConfig.topHeadlinesParam;
     this.sourcesParam = apiLocalConfig.sourcesParam;
-    this.defaultSources = apiLocalConfig.defaultSources;
   }
 
   getTopHeadlinesURL(sources) {

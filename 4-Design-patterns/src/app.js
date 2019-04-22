@@ -1,3 +1,4 @@
+import NewsBtn from './components/newsBtn';
 import NewsList from './components/newsList';
 import PageContent from './components/pageContent';
 import Sidebar from './components/sidebar';
@@ -13,6 +14,7 @@ class App {
     this.pageContent = new PageContent();
     this.sourcesList = new SourcesList();
     this.newsList = new NewsList();
+    this.newsBtn = new NewsBtn();
   }
 
   createRootEl() {
@@ -23,15 +25,15 @@ class App {
   }
 
   initEventHandlers() {
-    this.sourcesList.initCheckboxHandler(this.getEventHandlersCallbacks());
+    this.newsBtn.initClickHandler(this.getEventHandlersCallbacks());
   }
 
-  buildLayout([{ articles }, { sources }]) {
+  buildLayout(data) {
     const fragment = document.createDocumentFragment();
-    const newsListComponent = this.newsList.build(articles).getComponent();
-    const pageContentComponent = this.pageContent.build(newsListComponent).getComponent();
-    const sourcesListComponent = this.sourcesList.build(sources).getComponent();
-    const sidebarComponent = this.sidebar.build(sourcesListComponent).getComponent();
+    const pageContentComponent = this.pageContent.build().getComponent();
+    const newsBtn = this.newsBtn.build().getComponent();
+    const sourcesListComponent = this.sourcesList.build(data.sources).getComponent();
+    const sidebarComponent = this.sidebar.build(sourcesListComponent, newsBtn).getComponent();
 
     fragment.append(sidebarComponent);
     fragment.append(pageContentComponent);
@@ -39,19 +41,29 @@ class App {
     this.body.prepend(this.rootEl);
   }
 
-  fetchData() {
-    return Promise.all([this.requestService.getTopHeadlinesNews(), this.requestService.getSourcesNews()]);
+  updateLayout(newsListComponent) {
+    this.pageContent.build(newsListComponent).getComponent();
+  }
+
+  fetchArticles() {
+    return Promise.resolve(this.requestService.getTopHeadlinesNews());
+  }
+
+  fetchSources() {
+    return Promise.resolve(this.requestService.getSourcesNews());
   }
 
   getEventHandlersCallbacks() {
     return {
+      getAllCheckedValues: this.sourcesList.getAllCheckedValues.bind(this.sourcesList),
       getTopHeadlinesNews: this.requestService.getTopHeadlinesNews.bind(this.requestService),
-      updateNewsList: this.newsList.updateComponent.bind(this.newsList),
+      updateNewsList: this.newsList.build.bind(this.newsList),
+      updateLayout: this.updateLayout.bind(this),
     };
   }
 
   init() {
-    this.fetchData().then((data) => {
+    this.fetchSources().then((data) => {
       this.initEventHandlers(data);
       this.buildLayout(data);
     });
