@@ -3,6 +3,7 @@ const apiLocalConfig = {
   urlPrefix: 'https://newsapi.org/v2',
   topHeadlinesParam: 'top-headlines',
   sourcesParam: 'sources',
+  errorStatus: 'error',
 };
 
 export default apiLocalConfig;

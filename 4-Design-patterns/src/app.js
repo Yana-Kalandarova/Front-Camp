@@ -45,10 +45,6 @@ class App {
     this.pageContent.build(newsListComponent).getComponent();
   }
 
-  fetchArticles() {
-    return Promise.resolve(this.requestService.getTopHeadlinesNews());
-  }
-
   fetchSources() {
     return Promise.resolve(this.requestService.getSourcesNews());
   }
@@ -63,10 +59,21 @@ class App {
   }
 
   init() {
-    this.fetchSources().then((data) => {
-      this.initEventHandlers(data);
-      this.buildLayout(data);
-    });
+    this.fetchSources()
+      .then((response) => {
+        if (response.status === this.requestService.errorStatus) {
+          throw response;
+        }
+        this.initEventHandlers(response);
+        this.buildLayout(response);
+      })
+      .catch((response) => {
+        import('./components/errorPopUp').then((module)=>{
+          const errorPopUp = new module.default(response);
+
+          errorPopUp.show(response);
+        })
+      });
   }
 }
 

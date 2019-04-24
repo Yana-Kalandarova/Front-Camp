@@ -1,3 +1,5 @@
+import apiLocalConfig from '../api.config';
+
 class NewsBtn {
   constructor() {
     this.wrapper = NewsBtn.createComponentWrap();
@@ -25,10 +27,23 @@ class NewsBtn {
     this.btn.addEventListener('click', () => {
       const checkedValues = getAllCheckedValues();
 
-      checkedValues && getTopHeadlinesNews(checkedValues).then(({ articles }) => {
-        const newsList = updateNewsList(articles);
-        updateLayout(newsList.getComponent());
-      });
+      checkedValues && getTopHeadlinesNews(checkedValues)
+        .then((response) => {
+          if (response.status === apiLocalConfig.errorStatus) {
+            throw response;
+          }
+          const newsList = updateNewsList(response.articles);
+          updateLayout(newsList.getComponent());
+
+          console.log(response.articles);
+        })
+        .catch((response) => {
+          import('./errorPopUp').then((module)=>{
+            const errorPopUp = new module.default(response);
+
+            errorPopUp.show(response);
+          })
+        });
     });
   }
 

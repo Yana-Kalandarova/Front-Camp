@@ -3,6 +3,25 @@
   src: url('https://fonts.googleapis.com/css?family=Work+Sans');
 }
 
+$light-gray: #ddd;
+$dark-gray: #ccc;
+$box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+$default-indent: 15px;
+$default-border: 1px solid #777;
+
+@mixin style-btn {
+  display: block;
+  width: 100%;
+  padding: $default-indent;
+  border: $default-border;
+  border-radius: 4px;
+  background: $light-gray;
+
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -21,14 +40,14 @@ body {
   flex-direction: column;
   flex: 0 0 auto;
   height: 100vh;
-  padding: 15px;
-  background: #ccc;
+  padding: $default-indent;
+  background: $dark-gray;
 }
 
 .filter {
-  background: #ddd;
+  background: $light-gray;
   overflow-y: auto;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: $box-shadow;
 
   &_list {
     padding: 0;
@@ -49,7 +68,7 @@ body {
 
     &-text {
       position: relative;
-      padding-left: 30px;
+      padding-left: $default-indent * 2;
     }
 
     &-input + &-text svg {
@@ -61,11 +80,7 @@ body {
       transition: opacity 0.3s ease-in;
     }
 
-    &-input + &-text svg:first-child {
-      opacity: 1;
-
-    }
-
+    &-input + &-text svg:first-child,
     &-input:checked + &-text svg:last-child {
       opacity: 1;
     }
@@ -73,42 +88,33 @@ body {
 }
 
 .news-btn_wrapper {
-  margin: 15px 0;
+  margin: $default-indent 0;
 }
 
 .news-btn {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  border: 1px solid #777;
-  border-radius: 4px;
-  background: #ddd;
-
-  &:hover {
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
-  }
+  @include style-btn;
 }
 
 .page-content {
   flex: 1 1 auto;
   height: 100vh;
-  padding: 15px;
+  padding: $default-indent;
   overflow-y: auto;
 }
 
 .news-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 25px;
-  padding: 10px;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+  margin-bottom: $default-indent * 2;
+  padding: $default-indent;
+  box-shadow: $box-shadow;
 
   &_img {
     width: 100%;
   }
 
   &_title {
-    margin: 10px 0;
+    margin: $default-indent 0;
   }
 
   &_info-item {
@@ -125,7 +131,7 @@ body {
 
   &_link {
     position: relative;
-    padding-right: 15px;
+    padding-right: $default-indent;
     color: #000;
     text-decoration: none;
 
@@ -144,10 +150,35 @@ body {
   }
 }
 
+.error-popup_wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(#000,0.5);
+}
+
+.error-popup {
+  flex: 0 0 80%;
+  padding: $default-indent;
+  border: $default-border;
+  border-radius: 4px;
+  background: $dark-gray;
+  box-shadow: $box-shadow;
+
+  button {
+    @include style-btn;
+  }
+}
+
 @media (min-width: 768px) {
   .news-item {
     flex-direction: row;
-    margin-bottom: 15px;
+    margin-bottom: $default-indent;
 
     &_img-wrap {
       flex: 0 0 50%;
@@ -155,7 +186,11 @@ body {
 
     &_content {
       flex: 0 0 50%;
-      padding-left: 15px;
+      padding-left: $default-indent;
     }
+  }
+
+  .error-popup {
+    flex: 0 0 50%;
   }
 }

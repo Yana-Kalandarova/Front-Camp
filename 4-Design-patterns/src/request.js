@@ -6,12 +6,11 @@ class RequestService {
     this.urlPrefix = apiLocalConfig.urlPrefix;
     this.topHeadlinesParam = apiLocalConfig.topHeadlinesParam;
     this.sourcesParam = apiLocalConfig.sourcesParam;
+    this.errorStatus = apiLocalConfig.errorStatus;
   }
 
   getTopHeadlinesURL(sources) {
-    const sourceList = sources || this.defaultSources.join(',');
-
-    return `${this.urlPrefix}/${this.topHeadlinesParam}?sources=${sourceList}&apiKey=${this.apiKey}`;
+    return `${this.urlPrefix}/${this.topHeadlinesParam}?sources=${sources}&apiKey=${this.apiKey}`;
   }
 
   getSourcesURl() {
