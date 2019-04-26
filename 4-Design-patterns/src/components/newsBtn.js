@@ -1,9 +1,10 @@
-import apiLocalConfig from '../api.config';
+import RequestFactory from '../request';
 
 class NewsBtn {
   constructor() {
     this.wrapper = NewsBtn.createComponentWrap();
     this.btn = NewsBtn.createComponent();
+    this.request = new RequestFactory();
   }
 
   static createComponent() {
@@ -23,27 +24,17 @@ class NewsBtn {
     return this;
   }
 
-  initClickHandler({ getAllCheckedValues, getTopHeadlinesNews, updateNewsList, updateLayout }) {
+  newsBtnCallback(response) {
+    const newsList = this.updateNewsList(response.articles);
+
+    this.updateLayout(newsList.getComponent());
+  }
+
+  initClickHandler(callback) {
     this.btn.addEventListener('click', () => {
-      const checkedValues = getAllCheckedValues();
+      const checkedValues = callback.getAllCheckedValues();
 
-      checkedValues && getTopHeadlinesNews(checkedValues)
-        .then((response) => {
-          if (response.status === apiLocalConfig.errorStatus) {
-            throw response;
-          }
-          const newsList = updateNewsList(response.articles);
-          updateLayout(newsList.getComponent());
-
-          console.log(response.articles);
-        })
-        .catch((response) => {
-          import('./errorPopUp').then((module)=>{
-            const errorPopUp = new module.default(response);
-
-            errorPopUp.show(response);
-          })
-        });
+      checkedValues && this.request.create().getRequest(checkedValues, this.newsBtnCallback.bind(callback));
     });
   }
 

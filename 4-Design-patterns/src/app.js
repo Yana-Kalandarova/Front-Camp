@@ -3,13 +3,13 @@ import NewsList from './components/newsList';
 import PageContent from './components/pageContent';
 import Sidebar from './components/sidebar';
 import SourcesList from './components/sourcesList';
-import RequestService from './request';
+import RequestFactory from './request';
 
 class App {
   constructor() {
     this.body = document.querySelector('body');
     this.rootEl = this.createRootEl();
-    this.requestService = new RequestService();
+    this.request = new RequestFactory();
     this.sidebar = new Sidebar();
     this.pageContent = new PageContent();
     this.sourcesList = new SourcesList();
@@ -22,10 +22,6 @@ class App {
     this.rootEl.classList.add('root');
 
     return this.rootEl;
-  }
-
-  initEventHandlers() {
-    this.newsBtn.initClickHandler(this.getEventHandlersCallbacks());
   }
 
   buildLayout(data) {
@@ -45,35 +41,27 @@ class App {
     this.pageContent.build(newsListComponent).getComponent();
   }
 
-  fetchSources() {
-    return Promise.resolve(this.requestService.getSourcesNews());
+  initEventHandlers() {
+    this.newsBtn.initClickHandler(this.getEventHandlersCallbacks());
   }
 
   getEventHandlersCallbacks() {
     return {
       getAllCheckedValues: this.sourcesList.getAllCheckedValues.bind(this.sourcesList),
-      getTopHeadlinesNews: this.requestService.getTopHeadlinesNews.bind(this.requestService),
       updateNewsList: this.newsList.build.bind(this.newsList),
       updateLayout: this.updateLayout.bind(this),
     };
   }
 
-  init() {
-    this.fetchSources()
-      .then((response) => {
-        if (response.status === this.requestService.errorStatus) {
-          throw response;
-        }
-        this.initEventHandlers(response);
-        this.buildLayout(response);
-      })
-      .catch((response) => {
-        import('./components/errorPopUp').then((module)=>{
-          const errorPopUp = new module.default(response);
+  initCallback(response) {
+    return {
+      initEventHandlers: this.initEventHandlers(),
+      buildLayout: this.buildLayout(response),
+    };
+  }
 
-          errorPopUp.show(response);
-        })
-      });
+  init() {
+    this.request.create().getRequest(null, this.initCallback.bind(this));
   }
 }
 
