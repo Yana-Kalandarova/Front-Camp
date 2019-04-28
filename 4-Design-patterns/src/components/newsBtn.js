@@ -1,10 +1,10 @@
-import RequestFactory from '../request';
+import RequestProxy from '../request';
 
 class NewsBtn {
   constructor() {
     this.wrapper = NewsBtn.createComponentWrap();
     this.btn = NewsBtn.createComponent();
-    this.request = new RequestFactory();
+    this.request = new RequestProxy();
   }
 
   static createComponent() {

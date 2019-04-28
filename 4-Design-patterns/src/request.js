@@ -16,6 +16,13 @@ class RequestFactory {
   }
 }
 
+let RequestProxy = new Proxy(RequestFactory, {
+  construct(target, argumentsList) {
+    console.log('create a new request');
+    return new target(...argumentsList);
+  },
+});
+
 class RequestService {
   constructor(param) {
     this.apiKey = apiLocalConfig.apiKey;
@@ -79,4 +86,4 @@ class GetRequest extends RequestService {
   }
 }
 
-export default RequestFactory;
+export default RequestProxy;

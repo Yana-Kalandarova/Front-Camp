@@ -3,13 +3,13 @@ import NewsList from './components/newsList';
 import PageContent from './components/pageContent';
 import Sidebar from './components/sidebar';
 import SourcesList from './components/sourcesList';
-import RequestFactory from './request';
+import RequestProxy from './request';
 
 class App {
   constructor() {
     this.body = document.querySelector('body');
     this.rootEl = this.createRootEl();
-    this.request = new RequestFactory();
+    this.request = new RequestProxy();
     this.sidebar = new Sidebar();
     this.pageContent = new PageContent();
     this.sourcesList = new SourcesList();
