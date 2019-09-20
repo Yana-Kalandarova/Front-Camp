@@ -1,0 +1,22 @@
+class PageContent {
+  constructor() {
+    this.pageContent = PageContent.createComponent();
+  }
+
+  static createComponent() {
+    return document.createElement('section');
+  }
+
+  build(component) {
+    this.pageContent.className = 'page-content';
+    component && this.pageContent.append(component);
+
+    return this;
+  }
+
+  getComponent() {
+    return this.pageContent;
+  }
+}
+
+export default PageContent;
