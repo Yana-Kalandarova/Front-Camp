@@ -77,7 +77,7 @@ Create an index which will be used by this query and provide proof (from explain
 </pre>
 ![Task 4.1](img/4.1.png "Task 4.1")
 
-##Task 4.2
+## Task 4.2  
 Drop index from task 4.1  
 <pre>
   <code>
@@ -90,7 +90,7 @@ Drop index from task 4.1
   </code>
 </pre>
 
-##Task 4.3
+## Task 4.3  
 Create an index to make this query covered and provide proof (from explain() or Compass UI) that it is indeed covered:  
 **> db.restaurants.find({ restaurant_id: "41098650" }, { _id: 0, borough: 1 })**  
 <pre>
@@ -100,7 +100,7 @@ Create an index to make this query covered and provide proof (from explain() or 
 </pre>  
 ![Task 4.3](img/4.3.png "Task 4.3")
 
-##Task 4.4
+##  Task 4.4 
 Create a partial index on cuisine field which will be used only when filtering on borough equal to “Staten Island”:
   **db.restaurants.find({ borough: "Staten Island", cuisine: "American" }) – uses index**
   **db.restaurants.find({ borough: "Staten Island", name: "Bagel Land" }) – does not use index**
