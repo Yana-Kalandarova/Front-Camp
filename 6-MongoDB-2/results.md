@@ -24,7 +24,10 @@ How many records does each airline class have? Use $project to show result as:
 </pre>  
 <pre>
   <code>
-    
+    { "class" : "P", "total" : 5683 }
+    { "class" : "L", "total" : 23123 }
+    { "class" : "G", "total" : 17499 }
+    { "class" : "F", "total" : 140343 }
   </code>
 </pre>
 
@@ -67,7 +70,9 @@ What are the top 3 destination cities outside of the United States (destCountry 
 </pre>  
 <pre>
   <code>
-    
+    { "avgPassengers" : 8052.380952380952, "city" : "Abu Dhabi, United Arab Emirates" }
+    { "avgPassengers" : 7176.596638655462, "city" : "Dubai, United Arab Emirates" }
+    { "avgPassengers" : 7103.333333333333, "city" : "Guangzhou, China" }
   </code>
 </pre>
 
@@ -95,7 +100,7 @@ Which carriers provide flights to Latvia (destCountry)? Show result as one docum
 </pre>  
 <pre>
   <code>
-    
+    { "_id" : "Latvia", "carriers" : [ "Blue Jet SP Z o o", "Uzbekistan Airways", "JetClub AG" ] }
   </code>
 </pre>
 
@@ -108,7 +113,7 @@ first 3). Show result as:
     db.airlines.aggregate([
       {
         $match: {
-          originCountry: "United State",
+          originCountry: "United States",
           destCountry: {$in: [
             "Greece",
             "Italy",
@@ -140,7 +145,13 @@ first 3). Show result as:
 </pre>  
 <pre>
   <code>
-    
+    { "_id" : "Compagnia Aerea Italiana", "total" : 280256 }
+    { "_id" : "United Air Lines Inc.", "total" : 229936 }
+    { "_id" : "Emirates", "total" : 100903 }
+    { "_id" : "Air Europa", "total" : 94968 }
+    { "_id" : "Meridiana S.p.A", "total" : 20308 }
+    { "_id" : "Norwegian Air Shuttle ASA", "total" : 13344 }
+    { "_id" : "VistaJet Limited", "total" : 183 }
   </code>
 </pre>
 
@@ -208,7 +219,11 @@ Find the city (originCity) with the highest sum of passengers for each state (or
 </pre>  
 <pre>
   <code>
-    
+    { "totalPassengers" : 760120, "location" : { "state" : "Alabama", "city" : "Birmingham, AL" } }
+    { "totalPassengers" : 1472404, "location" : { "state" : "Alaska", "city" : "Anchorage, AK" } }
+    { "totalPassengers" : 13152753, "location" : { "state" : "Arizona", "city" : "Phoenix, AZ" } }
+    { "totalPassengers" : 571452, "location" : { "state" : "Arkansas", "city" : "Little Rock, AR" } }
+    { "totalPassengers" : 23701556, "location" : { "state" : "California", "city" : "Los Angeles, CA" } }
   </code>
 </pre>
 
