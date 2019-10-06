@@ -20,7 +20,17 @@ router.route('/add-contact').post((req, res) => {
 });
 
 router.route('/edit-contact/:contactId').put((req, res) => {
-  res.send('Contact has been updated');
+  Contact.findByIdAndUpdate({
+    _id: req.params.contactId,
+  }, {
+    name: req.body.name, phoneNumber: req.body.phoneNumber,
+  }, (err) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(req.params.contactId);
+    }
+  });
 });
 
 router.route('/delete-contact/:contactId').delete((req, res) => {
