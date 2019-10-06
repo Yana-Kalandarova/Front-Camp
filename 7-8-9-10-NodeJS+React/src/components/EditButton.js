@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import editIcon from '../assets/edit-icon.svg';
 
 const propTypes = {
-  contactId: PropTypes.number.isRequired,
+  contactId: PropTypes.string.isRequired,
 };
 
 const EditButton = ({ contactId }) => (

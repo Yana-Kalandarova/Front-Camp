@@ -7,7 +7,7 @@ import { editContact } from '../actions/types';
 
 const propTypes = {
   contactList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    _id: PropTypes.string,
     name: PropTypes.string,
     phoneNumber: PropTypes.string,
   })).isRequired,

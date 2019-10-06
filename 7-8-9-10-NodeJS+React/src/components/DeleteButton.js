@@ -5,7 +5,7 @@ import deleteIcon from '../assets/delete-icon.svg';
 
 const propTypes = {
   onDeleteContact: PropTypes.func.isRequired,
-  contactId: PropTypes.number.isRequired,
+  contactId: PropTypes.string.isRequired,
 };
 
 const DeleteButton = ({ onDeleteContact, contactId }) => {

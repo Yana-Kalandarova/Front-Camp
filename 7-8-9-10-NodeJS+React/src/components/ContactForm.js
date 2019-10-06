@@ -6,7 +6,7 @@ import ErrorMessage from './ErrorMessage';
 
 const propTypes = {
   contactList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    _id: PropTypes.string,
     name: PropTypes.string,
     phoneNumber: PropTypes.string,
   })).isRequired,
@@ -32,20 +32,20 @@ class ContactForm extends Component {
 
   isEditMode = () => this.props.match.path.includes('/edit-contact/');
 
-  getContactId = () => parseInt(this.props.match.params.contactId);
+  getContactId = () => this.props.match.params.contactId;
 
   getContactName = () => {
     const { contactList } = this.props;
     const contactId = this.getContactId();
 
-    return contactList.find(contact => contact.id === contactId).name;
+    return contactList.find(contact => contact._id === contactId).name;
   };
 
   getContactPhone = () => {
     const { contactList } = this.props;
     const contactId = this.getContactId();
 
-    return contactList.find(contact => contact.id === contactId).phoneNumber;
+    return contactList.find(contact => contact._id === contactId).phoneNumber;
   };
 
   handleChangeInput = (e) => {
@@ -90,7 +90,7 @@ class ContactForm extends Component {
     const { name, phoneNumber } = this.state;
 
     const newContact = {
-      id: this.isEditMode() ? this.getContactId() : contactList[contactList.length - 1].id + 1,
+      id: this.isEditMode() ? this.getContactId() : null,
       name: name,
       phoneNumber: phoneNumber,
     };

@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ContactForm from './ContactForm';
-import { addContact } from '../actions/types';
+import { addContact } from '../actions';
 
 const propTypes = {
   contactList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    _id: PropTypes.string,
     name: PropTypes.string,
     phoneNumber: PropTypes.string,
   })).isRequired,

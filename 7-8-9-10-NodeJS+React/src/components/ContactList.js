@@ -7,7 +7,7 @@ import { filterList } from '../utils/index';
 
 const propTypes = {
   contactList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    _id: PropTypes.string,
     name: PropTypes.string,
     phoneNumber: PropTypes.string,
   })).isRequired,
@@ -17,7 +17,7 @@ const propTypes = {
 const ContactList = ({ contactList, onDeleteContact }) => (
   <ul className="contact_list">
     {
-      contactList.map(contact => <ContactItem {...contact} key={contact.id} onDeleteContact={onDeleteContact} />)
+      contactList.map(contact => <ContactItem {...contact} key={contact._id} onDeleteContact={onDeleteContact} />)
     }
   </ul>
 );
