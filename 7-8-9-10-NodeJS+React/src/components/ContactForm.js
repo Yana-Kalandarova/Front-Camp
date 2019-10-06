@@ -86,11 +86,11 @@ class ContactForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { contactList, onUpdateContact, history } = this.props;
+    const { onUpdateContact, history } = this.props;
     const { name, phoneNumber } = this.state;
 
     const newContact = {
-      id: this.isEditMode() ? this.getContactId() : null,
+      _id: this.isEditMode() ? this.getContactId() : null,
       name: name,
       phoneNumber: phoneNumber,
     };
