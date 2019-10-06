@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  FETCH_CONTACT_LIST, SEARCH_CONTACT, ADD_CONTACT,
+  FETCH_CONTACT_LIST, SEARCH_CONTACT, ADD_CONTACT, DELETE_CONTACT,
 } from './types';
 import { serverUrl } from '../../server/config/server';
 
@@ -9,11 +9,12 @@ export const fetchContactList = contactList => ({
   contactList,
 });
 
-export const fetchContacts = () => dispatch => axios.get(serverUrl).then((res) => {
-  dispatch(fetchContactList(res.data));
-}, (err) => {
-  console.log(`Error: ${err}`);
-});
+export const fetchContacts = () => dispatch => axios
+  .get(serverUrl).then((res) => {
+    dispatch(fetchContactList(res.data));
+  }, (err) => {
+    console.log(`Error: ${err}`);
+  });
 
 export const searchContact = searchValue => ({
   type: SEARCH_CONTACT,
@@ -29,8 +30,25 @@ export const addContactSuccess = data => ({
   },
 });
 
-export const addContact = contact => dispatch => axios.post(`${serverUrl}/add-contact`, contact).then((res) => {
-  dispatch(addContactSuccess(res.data));
-}, (err) => {
-  console.log(`Error: ${err}`);
+export const addContact = contact => dispatch => axios
+  .post(`${serverUrl}/add-contact`, contact)
+  .then((res) => {
+    dispatch(addContactSuccess(res.data));
+  }, (err) => {
+    console.log(`Error: ${err}`);
+  });
+
+export const deleteContactSuccess = _id => ({
+  type: DELETE_CONTACT,
+  payload: {
+    _id,
+  },
 });
+
+export const deleteContact = contactId => dispatch => axios
+  .delete(`${serverUrl}/delete-contact/${contactId}`)
+  .then((res) => {
+    dispatch(deleteContactSuccess(res.data));
+  }, (err) => {
+    console.log(`Error: ${err}`);
+  });

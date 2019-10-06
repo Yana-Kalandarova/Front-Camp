@@ -1,5 +1,5 @@
 import { findIndexById } from '../utils/index';
-import { FETCH_CONTACT_LIST, ADD_CONTACT } from '../actions/types';
+import { FETCH_CONTACT_LIST, ADD_CONTACT, DELETE_CONTACT } from '../actions/types';
 
 const contactList = (list = [], action) => {
   switch (action.type) {
@@ -14,9 +14,9 @@ const contactList = (list = [], action) => {
       ];
     }
 
-    case 'DELETE_CONTACT':
+    case DELETE_CONTACT:
     {
-      const deletedIndex = findIndexById(list, action._id);
+      const deletedIndex = findIndexById(list, action.payload._id);
 
       return list
         .slice(0, deletedIndex)
