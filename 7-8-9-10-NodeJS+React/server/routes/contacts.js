@@ -24,7 +24,13 @@ router.route('/edit-contact/:contactId').put((req, res) => {
 });
 
 router.route('/delete-contact/:contactId').delete((req, res) => {
-  res.send('Contact has been deleted');
+  Contact.findByIdAndRemove({ _id: req.params.contactId }, (err) => {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(req.params.contactId);
+    }
+  });
 });
 
 
