@@ -15,7 +15,7 @@ router.route('/add-contact').post((req, res) => {
   const newUser = new Contact({ name, phoneNumber });
 
   newUser.save()
-    .then(() => res.json('User added!'))
+    .then(() => res.json(newUser))
     .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
