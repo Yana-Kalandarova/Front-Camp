@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ContactForm from './ContactForm';
-import { editContact } from '../actions';
+import { editContact } from '../actions/types';
 
 const propTypes = {
   contactList: PropTypes.arrayOf(PropTypes.shape({

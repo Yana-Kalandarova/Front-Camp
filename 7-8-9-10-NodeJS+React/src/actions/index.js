@@ -1,19 +1,21 @@
+import axios from 'axios';
+import {
+  FETCH_CONTACT_LIST, SEARCH_CONTACT,
+} from './types';
+import { serverUrl } from '../../server/config/server';
+
+export const fetchContactList = contactList => ({
+  type: FETCH_CONTACT_LIST,
+  contactList,
+});
+
+export const fetchContacts = () => dispatch => axios.get(serverUrl).then((res) => {
+  dispatch(fetchContactList(res.data));
+}, (err) => {
+  console.log(`Error: ${err}`);
+});
+
 export const searchContact = searchValue => ({
-  type: 'SEARCH_CONTACT',
+  type: SEARCH_CONTACT,
   searchValue,
-});
-
-export const deleteContact = id => ({
-  type: 'DELETE_CONTACT',
-  id,
-});
-
-export const addContact = contact => ({
-  type: 'ADD_CONTACT',
-  contact,
-});
-
-export const editContact = contact => ({
-  type: 'EDIT_CONTACT',
-  contact,
 });

@@ -1,7 +1,11 @@
 import { findIndexById } from '../utils/index';
+import { FETCH_CONTACT_LIST } from '../actions/types';
 
 const contactList = (list = [], action) => {
   switch (action.type) {
+    case FETCH_CONTACT_LIST:
+      return action.contactList;
+
     case 'DELETE_CONTACT':
     {
       const deletedIndex = findIndexById(list, action.id);

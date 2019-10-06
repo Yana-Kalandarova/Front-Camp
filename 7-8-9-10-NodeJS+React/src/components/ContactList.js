@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteContact } from '../actions';
+import { deleteContact } from '../actions/types';
 import ContactItem from './ContactItem';
 import { filterList } from '../utils/index';
 
