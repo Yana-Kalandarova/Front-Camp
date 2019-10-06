@@ -22,13 +22,11 @@ router.route('/add-contact').post((req, res) => {
 router.route('/edit-contact/:contactId').put((req, res) => {
   Contact.findByIdAndUpdate({
     _id: req.params.contactId,
-  }, {
-    name: req.body.name, phoneNumber: req.body.phoneNumber,
-  }, (err) => {
+  }, req.body, (err) => {
     if (err) {
       res.json(err);
     } else {
-      res.json(req.params.contactId);
+      res.json(req.body);
     }
   });
 });
