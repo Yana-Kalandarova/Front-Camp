@@ -1,0 +1,9 @@
+# WebStorm
+/.idea/
+
+# Dependency directories
+node_modules/
+coverage/
+
+# Distribution
+/dist
