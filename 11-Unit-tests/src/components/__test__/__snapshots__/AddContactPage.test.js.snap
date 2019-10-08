@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddContactPage renders correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+    >
+      <Connect(AddContactPage)
+        contactList={
+          Array [
+            Object {
+              "_id": "1a2b3c",
+              "name": "Test Name",
+              "phoneNumber": "12345",
+            },
+            Object {
+              "_id": "1a2b3c",
+              "name": "Test Name",
+              "phoneNumber": "12345",
+            },
+          ]
+        }
+        onUpdateContact={[MockFunction]}
+      >
+        <AddContactPage
+          contactList={Array []}
+          onAddContact={[Function]}
+          onUpdateContact={[MockFunction]}
+        >
+          <div
+            className="view_wrap"
+          >
+            <h1
+              className="view_title"
+            >
+              Add Contact
+            </h1>
+            <withRouter(ContactForm)
+              contactList={Array []}
+              onUpdateContact={[Function]}
+            >
+              <ContactForm
+                contactList={Array []}
+                history={
+                  Object {
+                    "action": "POP",
+                    "block": [Function],
+                    "createHref": [Function],
+                    "go": [Function],
+                    "goBack": [Function],
+                    "goForward": [Function],
+                    "length": 1,
+                    "listen": [Function],
+                    "location": Object {
+                      "hash": "",
+                      "pathname": "/",
+                      "search": "",
+                      "state": undefined,
+                    },
+                    "push": [Function],
+                    "replace": [Function],
+                  }
+                }
+                location={
+                  Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  }
+                }
+                match={
+                  Object {
+                    "isExact": true,
+                    "params": Object {},
+                    "path": "/",
+                    "url": "/",
+                  }
+                }
+                onUpdateContact={[Function]}
+              >
+                <form
+                  className="contact_form"
+                  onSubmit={[Function]}
+                >
+                  <div
+                    className="contact_form-field-wrap"
+                  >
+                    <label
+                      htmlFor="name"
+                    >
+                      Name:
+                    </label>
+                    <input
+                      className="contact_form-field"
+                      id="name"
+                      name="name"
+                      onChange={[Function]}
+                      placeholder="Name"
+                      type="text"
+                      value=""
+                    />
+                    <ErrorMessage
+                      message=""
+                    />
+                  </div>
+                  <div
+                    className="contact_form-field-wrap"
+                  >
+                    <label
+                      htmlFor="phoneNumber"
+                    >
+                      Phone Number:
+                    </label>
+                    <input
+                      className="contact_form-field"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      onChange={[Function]}
+                      placeholder="Phone"
+                      type="tel"
+                      value=""
+                    />
+                    <ErrorMessage
+                      message=""
+                    />
+                  </div>
+                  <div
+                    className="contact_btn-wrap"
+                  >
+                    <Link
+                      className="contact_btn-cancel"
+                      to="/"
+                    >
+                      <LinkAnchor
+                        className="contact_btn-cancel"
+                        href="/"
+                        navigate={[Function]}
+                      >
+                        <a
+                          className="contact_btn-cancel"
+                          href="/"
+                          onClick={[Function]}
+                        >
+                          Cancel
+                        </a>
+                      </LinkAnchor>
+                    </Link>
+                    <button
+                      className="contact_btn-save"
+                      disabled={true}
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </ContactForm>
+            </withRouter(ContactForm)>
+          </div>
+        </AddContactPage>
+      </Connect(AddContactPage)>
+    </Router>
+  </BrowserRouter>
+</Provider>
+`;

@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContactItem renders correctly 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <ContactItem
+      _id="1a2b3c"
+      name="Test Name"
+      onDeleteContact={[MockFunction]}
+      phoneNumber="12345"
+    >
+      <li
+        className="contact_list-item"
+      >
+        <dl>
+          <dt>
+            Test Name
+          </dt>
+          <dd>
+            12345
+          </dd>
+        </dl>
+        <EditButton
+          contactId="1a2b3c"
+        >
+          <Link
+            className="contact_btn-edit"
+            to="/edit-contact/1a2b3c"
+          >
+            <LinkAnchor
+              className="contact_btn-edit"
+              href="/edit-contact/1a2b3c"
+              navigate={[Function]}
+            >
+              <a
+                className="contact_btn-edit"
+                href="/edit-contact/1a2b3c"
+                onClick={[Function]}
+              >
+                <svg>
+                  <use
+                    xlinkHref="#undefined"
+                  />
+                </svg>
+              </a>
+            </LinkAnchor>
+          </Link>
+        </EditButton>
+        <DeleteButton
+          contactId="1a2b3c"
+          onDeleteContact={[MockFunction]}
+        >
+          <button
+            className="contact_btn-delete"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg>
+              <use
+                xlinkHref="#undefined"
+              />
+            </svg>
+          </button>
+        </DeleteButton>
+      </li>
+    </ContactItem>
+  </Router>
+</BrowserRouter>
+`;

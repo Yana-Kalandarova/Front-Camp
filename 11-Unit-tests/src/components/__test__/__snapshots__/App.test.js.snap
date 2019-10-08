@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <App>
+    <BrowserRouter>
+      <Router
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "createHref": [Function],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+      >
+        <Switch>
+          <Route
+            component={[Function]}
+            computedMatch={
+              Object {
+                "isExact": true,
+                "params": Object {},
+                "path": "/",
+                "url": "/",
+              }
+            }
+            exact={true}
+            location={
+              Object {
+                "hash": "",
+                "pathname": "/",
+                "search": "",
+                "state": undefined,
+              }
+            }
+            path="/"
+          >
+            <ContactListPage
+              history={
+                Object {
+                  "action": "POP",
+                  "block": [Function],
+                  "createHref": [Function],
+                  "go": [Function],
+                  "goBack": [Function],
+                  "goForward": [Function],
+                  "length": 1,
+                  "listen": [Function],
+                  "location": Object {
+                    "hash": "",
+                    "pathname": "/",
+                    "search": "",
+                    "state": undefined,
+                  },
+                  "push": [Function],
+                  "replace": [Function],
+                }
+              }
+              location={
+                Object {
+                  "hash": "",
+                  "pathname": "/",
+                  "search": "",
+                  "state": undefined,
+                }
+              }
+              match={
+                Object {
+                  "isExact": true,
+                  "params": Object {},
+                  "path": "/",
+                  "url": "/",
+                }
+              }
+            >
+              <div
+                className="view_wrap"
+              >
+                <h1
+                  className="view_title"
+                >
+                  Contact List
+                </h1>
+                <Connect(SearchBar)>
+                  <SearchBar
+                    onSearchContact={[Function]}
+                    searchValue=""
+                  >
+                    <input
+                      className="contact_search-field"
+                      onChange={[Function]}
+                      placeholder="Search"
+                      type="search"
+                      value=""
+                    />
+                  </SearchBar>
+                </Connect(SearchBar)>
+                <Connect(ContactList)>
+                  <ContactList
+                    contactList={Array []}
+                    onDeleteContact={[Function]}
+                  >
+                    <ul
+                      className="contact_list"
+                    />
+                  </ContactList>
+                </Connect(ContactList)>
+                <div
+                  className="contact_btn-wrap"
+                >
+                  <Link
+                    className="contact_btn-add"
+                    to="/add-contact"
+                  >
+                    <LinkAnchor
+                      className="contact_btn-add"
+                      href="/add-contact"
+                      navigate={[Function]}
+                    >
+                      <a
+                        className="contact_btn-add"
+                        href="/add-contact"
+                        onClick={[Function]}
+                      >
+                        Add Contact
+                      </a>
+                    </LinkAnchor>
+                  </Link>
+                </div>
+              </div>
+            </ContactListPage>
+          </Route>
+        </Switch>
+      </Router>
+    </BrowserRouter>
+  </App>
+</Provider>
+`;
